@@ -1,4 +1,4 @@
-# Registering custom pings
+onCreate# Registering custom pings
 
 After defining [custom pings](../../user/pings/custom.md) `glean_parser` is able to generate code from
 `pings.yaml` files in a `Pings` object, which must be instantiated so Glean can send pings by name.
@@ -21,8 +21,6 @@ import org.mozilla.yourApplication.GleanMetrics.Pings
 
 override fun onCreate() {
     Glean.registerPings(Pings)
-
-    Glean.initialize(applicationContext, uploadEnabled = true)
 }
 ```
 
@@ -68,8 +66,6 @@ Glean.initialize(
 )
 ```
 
-If your project is a distributable Python package, you need to include the `pings.yaml` file using [one of the myriad ways to include data in a Python package](https://setuptools.readthedocs.io/en/latest/setuptools.html#including-data-files) and then use [`pkg_resources.resource_filename()`](https://setuptools.readthedocs.io/en/latest/pkg_resources.html#resource-extraction) to get the filename at runtime.
-
 ```Python
 from glean import load_pings
 from pkg_resources import resource_filename
@@ -82,10 +78,7 @@ pings = load_pings(resource_filename(__name__, "pings.yaml"))
 <div data-lang="Rust" class="tab">
 
 In Rust custom pings need to be registered individually.
-This should be done before calling `glean::initialize`.
-
-```Rust
-use your_glean_metrics::pings;
+This should be done before calling 
 
 glean::register_ping_type(&pings::custom_ping);
 glean::register_ping_type(&pings::search);
